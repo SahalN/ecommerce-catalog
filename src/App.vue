@@ -1,28 +1,27 @@
+<!-- @format -->
+
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ProductViewer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProductViewer from "./components/ProductViewer.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    ProductViewer,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+:root {
+  --men-bg: #d6e6ff;
+  --women-bg: #fde2ff;
+  --unavailable-bg: #f3f4f6;
+  --men-theme-color: #002772;
+  --women-theme-color: #720060;
 }
 </style>
