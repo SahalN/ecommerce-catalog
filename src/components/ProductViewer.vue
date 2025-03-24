@@ -2,7 +2,21 @@
 
 <template>
   <div :class="['page-wrapper', pageClass]">
-    <div v-if="loading" class="loader"></div>
+    <!-- Skeleton Loader -->
+    <div v-if="loading" class="skeleton">
+      <div class="skeleton-image shimmer"></div>
+      <div class="skeleton-details">
+        <div class="skeleton-title shimmer"></div>
+        <div class="skeleton-sub shimmer"></div>
+        <div class="skeleton-rating shimmer"></div>
+        <div class="skeleton-description shimmer"></div>
+        <div class="skeleton-price shimmer"></div>
+        <div class="skeleton-buttons">
+          <div class="skeleton-btn shimmer"></div>
+          <div class="skeleton-btn shimmer"></div>
+        </div>
+      </div>
+    </div>
 
     <div v-else-if="product" class="hero">
       <div class="image">
@@ -92,14 +106,14 @@ export default {
       return "";
     },
     ellipseFilled() {
-      if (!this.product) return require("@/assets/ellipse-purple.svg"); // default jika product belum ada
+      if (!this.product) return require("@/assets/ellipse-purple.svg");
       if (this.product.category === "men's clothing") {
         return require("@/assets/ellipse-blue.svg");
       }
       if (this.product.category === "women's clothing") {
         return require("@/assets/ellipse-purple.svg");
       }
-      return require("@/assets/ellipse-purple.svg"); // fallback default
+      return require("@/assets/ellipse-purple.svg");
     },
     ellipseEmpty() {
       if (!this.product) return require("@/assets/white-ellipse-purple.svg");
@@ -187,7 +201,7 @@ export default {
 }
 
 .unavailable-section {
-  --theme-color: #000000; /* hitam default */
+  --theme-color: #000000;
 }
 
 .hero,
@@ -214,6 +228,13 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.unavailable img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
 }
 
 .sad-face {
@@ -332,9 +353,15 @@ export default {
 }
 
 .unavailable-content {
+  text-align: center;
   position: absolute;
   z-index: 10;
 }
+
+.unavailable .btn-next {
+  min-width: 420px;
+}
+
 .loader {
   position: fixed;
   top: 0;
@@ -364,13 +391,29 @@ export default {
   }
 }
 
-/* Media Query untuk Mobile */
 @media (max-width: 768px) {
-  .hero {
+  .hero,
+  .unavailable {
     flex-direction: column;
     padding: 30px 24px;
     margin: 60px 20px;
     gap: 24px;
+  }
+
+  .unavailable .btn-next {
+    min-width: 200px;
+  }
+
+  .unavailable {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .unavailable-content {
+    padding: 20px;
   }
 
   .product-title {
@@ -416,11 +459,164 @@ export default {
     gap: 10px;
     font-size: 10px;
   }
+
+  .unavailable img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .unavailable {
+    padding: 30px 24px;
+    margin: 60px 20px;
+    gap: 24px;
+  }
+
+  .unavailable img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 @media (max-width: 1024px) {
-  .hero {
+  .hero,
+  .unavailable {
     flex-direction: column;
+  }
+}
+
+/* Skeleton Loader */
+.skeleton {
+  display: flex;
+  gap: 2rem;
+  padding: 50px 56px;
+  max-width: 1200px;
+  margin: 126px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.skeleton-image {
+  width: 300px;
+  height: 380px;
+  background: #e0e0e0;
+  border-radius: 10px;
+}
+
+.skeleton-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skeleton-title,
+.skeleton-sub,
+.skeleton-rating,
+.skeleton-description,
+.skeleton-price,
+.skeleton-btn {
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 28px;
+}
+
+.skeleton-sub,
+.skeleton-rating {
+  width: 50%;
+}
+
+.skeleton-description {
+  width: 100%;
+  height: 60px;
+}
+
+.skeleton-price {
+  width: 30%;
+  height: 24px;
+}
+
+.skeleton-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.skeleton-btn {
+  width: 100px;
+  height: 40px;
+}
+
+/* shimmer effect */
+.shimmer {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Mobile Version */
+@media (max-width: 768px) {
+  .skeleton {
+    flex-direction: column;
+    padding: 20px;
+    margin: 80px 20px;
+  }
+
+  .skeleton-image {
+    width: 100%;
+    height: 250px;
+  }
+
+  .skeleton-details {
+    gap: 0.75rem;
+  }
+
+  .skeleton-title {
+    width: 80%;
+    height: 24px;
+  }
+
+  .skeleton-sub,
+  .skeleton-rating {
+    width: 60%;
+  }
+
+  .skeleton-description {
+    height: 40px;
+  }
+
+  .skeleton-price {
+    width: 40%;
+    height: 20px;
+  }
+
+  .skeleton-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skeleton-btn {
+    width: 100%;
+    height: 40px;
   }
 }
 </style>
