@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -116,10 +117,10 @@ export default {
       this.loading = true;
       const currentIndex = this.index;
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://fakestoreapi.com/products/${currentIndex}`
         );
-        const data = await response.json();
+        const data = response.data;
         if (
           data.category === "men's clothing" ||
           data.category === "women's clothing"
@@ -129,13 +130,14 @@ export default {
           this.product = null;
         }
       } catch (error) {
-        console.error("Fetch error:", error);
+        console.error("Axios error:", error);
       } finally {
         this.loading = false;
         this.index = this.index >= 20 ? 1 : this.index + 1;
       }
     },
   },
+
   mounted() {
     this.nextProduct();
   },
@@ -192,35 +194,26 @@ export default {
 .unavailable {
   position: relative;
   z-index: 1;
-  margin: 0 auto;
+  margin: 126px auto;
   padding: 50px 56px;
   max-width: 1200px;
+  display: flex;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 }
 
 .hero {
-  z-index: 1;
-  display: flex;
   flex-direction: row;
   gap: 68px;
-  margin: 126px 150px;
-  padding: 50px 56px;
   justify-content: center;
   align-items: center;
-  background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
 }
 
 .unavailable {
-  display: flex;
   flex-direction: column;
-  margin: 126px 150px;
-  padding: 50px 56px;
   justify-content: center;
   align-items: center;
-  background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
 }
 
 .sad-face {
@@ -243,7 +236,6 @@ export default {
   font-weight: 600;
   font-family: Inter;
   color: var(--theme-color);
-
   margin: 0;
 }
 
@@ -306,8 +298,8 @@ export default {
   font-weight: 600;
   line-height: normal;
   cursor: pointer;
-  width: 100%; /* ini yang bikin tombol full width */
-  box-sizing: border-box; /* biar padding tidak melebihi parent */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .btn-buy {
@@ -326,7 +318,7 @@ export default {
   margin: 0;
   display: flex;
   flex-direction: row;
-  gap: 19px;
+  gap: 16px;
   width: 100%;
 }
 
@@ -342,5 +334,93 @@ export default {
 .unavailable-content {
   position: absolute;
   z-index: 10;
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 6px solid #ccc;
+  border-top-color: var(--theme-color, #333);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media Query untuk Mobile */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding: 30px 24px;
+    margin: 60px 20px;
+    gap: 24px;
+  }
+
+  .product-title {
+    font-size: 24px;
+  }
+
+  .rate {
+    font-size: small;
+  }
+
+  .rate > img {
+    width: 10px;
+  }
+
+  .sub-desc {
+    padding: 4px;
+  }
+
+  .product-category {
+    font-size: 12px;
+  }
+
+  .btn-buy,
+  .btn-next {
+    font-size: 12px;
+  }
+
+  .product-description {
+    font-size: 1rem;
+  }
+
+  .product-price {
+    font-size: 1rem;
+  }
+
+  .product-img {
+    width: 180px;
+    height: auto;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+  }
 }
 </style>
