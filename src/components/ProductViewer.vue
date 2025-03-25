@@ -2,7 +2,6 @@
 
 <template>
   <div :class="['page-wrapper', pageClass]">
-    <!-- Skeleton Loader -->
     <div v-if="loading" class="skeleton">
       <div class="skeleton-image shimmer"></div>
       <div class="skeleton-details">
@@ -490,7 +489,6 @@ export default {
   }
 }
 
-/* Skeleton Loader */
 .skeleton {
   display: flex;
   gap: 2rem;
@@ -557,7 +555,6 @@ export default {
   height: 40px;
 }
 
-/* shimmer effect */
 .shimmer {
   background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
   background-size: 200% 100%;
@@ -573,7 +570,6 @@ export default {
   }
 }
 
-/* Mobile Version */
 @media (max-width: 768px) {
   .skeleton {
     flex-direction: column;
