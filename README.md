@@ -2,7 +2,7 @@
 
 # 📦 ecommerce-catalog
 
-**ecommerce-catalog** adalah aplikasi front-end berbasis **Vue 2** yang dikembangkan sebagai bagian dari proyek internship **Core Initiative**. Aplikasi ini berfungsi sebagai katalog produk e-commerce yang memungkinkan pengguna untuk menelusuri, mencari, dan melihat detail produk dengan cepat dan efisien.
+**ecommerce-catalog** adalah aplikasi front-end berbasis **Vue 2** yang dikembangkan sebagai bagian dari proyek internship **Core Initiative** dengan Rakamin Academy. Aplikasi ini berfungsi sebagai katalog produk e-commerce yang memungkinkan pengguna untuk menelusuri dan melihat detail produk dengan cepat serta efisien.
 
 ## 🎯 Tujuan Project
 
@@ -11,19 +11,19 @@ Membangun antarmuka katalog produk yang intuitif dan user-friendly.
 ## ⚙️ Fitur Utama
 
 - 📄 **Halaman Daftar Produk (Product Listing)**  
-  Menampilkan semua produk dengan informasi singkat seperti nama, gambar, harga, dan kategori.
+  Menampilkan semua produk dengan informasi singkat seperti nama, gambar, deskripsi, harga, dan kategori.
 
 - 💎 **Responsive Design**  
-  Desain yang mobile-friendly dan responsif dengan **Vue 2** dan **Tailwind CSS** / **Bootstrap Vue**.
+  Desain yang mobile-friendly dan responsif dengan **Vue 2** dan Vanilla CSS.
 
 - ⚡ **Integrasi API**  
-  Mendapatkan data produk dari REST API yang disediakan oleh tim backend Core Initiative.
+  Mendapatkan data produk dari REST API yang disediakan oleh tim Core Initiative.
 
 ## 🛠️ Tech Stack
 
 - [Vue 2](https://v2.vuejs.org/) (Options API)
-- [Vue Router](https://router.vuejs.org/) untuk navigasi
-- [Vuex](https://vuex.vuejs.org/) untuk state management
+- Docker
+- Jest
 
 ## 🚀 Cara Menjalankan Project
 
@@ -32,9 +32,10 @@ Membangun antarmuka katalog produk yang intuitif dan user-friendly.
 git clone https://github.com/core-initiative/ecommerce-catalog.git
 cd ecommerce-catalog
 
-# Install dependencies
-npm install
+# Nyalakan Docker engine
 
-# Jalankan development server
-npm run serve
+# Run command berikut
+docker run -it -p 8080:80 --rm --name ecommerce-catalog-1 muhammadsahalnurdin/ecommerce-catalog
+
+Note: Jika port sudah digunakan maka gunakan port yang lain.
 ```
